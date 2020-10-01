@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Disaster incident chart</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href=".https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+<script type="text/javascript" src="header.js"></script>
+<div id="test"></div>
+
+<script type="text/javascript" src="../js/d3.js"></script>
+<script type="text/javascript" src="../js/crossfilter.js"></script>
+<script type="text/javascript" src="../js/dc.js"></script>
+<script type="text/javascript">
+
+var chart = new dc.LineChart("#test");
+d3.csv("fema_declaration.csv").then(function(incidents) {
+
+  incidents.forEach(function(x) {
+    x.incident_type = +x.incident_type;
+  });
+
+  var ndx                 = crossfilter(incidents),
+      runDimension        = ndx.dimension(function(d) {return +d.fy_declared;}),
+      speedSumGroup       = runDimension.group().reduceSum(function(d) {return d.incident_type * d.fy_declared;});
+
+  chart
+    .width(768)
+    .height(480)
+    .x(d3.scaleLinear().domain([0,67]))
+    .curve(d3.curveStepBefore)
+    .renderArea(true)
+    .brushOn(false)
+    .renderDataPoints(true)
+    .clipPadding(10)
+    .yAxisLabel("Number of Incidents")
+    .xAxisLabel("Year")
+    .dimension(runDimension)
+    .group(speedSumGroup);
+
+  chart.render();
+
+});
+
+</script>
+
+</div>
+</body>
+</html>
