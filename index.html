@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Natural Disasters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">Natural Disasters
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="hero text-center">
+      <h3>Natural Disasters in USA - an Interactive Visualization</h3>
+      <p> This page provides interactive visualization for the user about various FEMA declared disasters that occured
+          between 1953 and 2020. Filter by date, by state, or by the actual incident to get a visual snapshot of the incidents that occured.
+      </p>
+    </div>
+    <div class="container">
+      <div class="row margin-top-50">
+        <div class="col-md-2">
+          <aside class="filters">
+            <div class="panel panel-default">
+              <div class="panel-heading">Filter Search</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <ul class="list-group" id="filters">
+                      <li class="filter list-group-item">
+                        <label for="date">Search by Date - enter format m/d/yy</label>
+                        <input class="form-control" id="datetime" type="text" placeholder="">
+                      </li>
+                    </ul>
+                  </div>
+                  <button id="filter-btn" type="button" class="btn btn-default" onclick="dateFilter()">Filter</button>
+                  <button id="reset-btn" type="reset" class="btn btn-default">Reset</button>
+               </form>
+              </div>
+            
+    <form action="/action_page.php">
+      <label for="Disasters">Filter by Disaster:</label>
+      <select id="Disasters" name="Disasters" onchange = "disasterchange(this.value)"></select>
+    </form>
+   
+    <form action="/action_page.php">
+      <label for="States">Filter by State:</label>
+      <select id="States" name="States" onchange = "statechange(this.value)"></select>
+    </form>
+  </div>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">         
+          
+        </ul>
+    </div>
+  </nav>
+
+</div>
+<div class="col-md-5">
+<div id="Visualization"></div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script> 
+<script src="../static/logic.js"></script>
+
+</body>
+
+</html>
